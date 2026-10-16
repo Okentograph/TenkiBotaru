@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>天気螢 ― 一年の天気の軌道</title>
+    <link rel="stylesheet" href="./styles.css" type="text/css" />
+  </head>
+  <body>
+    <!-- 作品は画面いっぱいに描く。題名は左上、都市は上、年は下に小さく重ねるだけ -->
+    <canvas id="sky"></canvas>
+    <canvas id="axes"></canvas>
+    <div id="overlay">
+      <h1>天気螢 <span>― 一年の天気の軌道</span></h1>
+      <p id="info"></p>
+    </div>
+    <!-- 画面の上：表示する都市を選ぶ -->
+    <nav id="cities" class="picker"></nav>
+    <!-- 画面の下：表示する年を選ぶ（2000〜2024） -->
+    <nav id="years" class="picker"></nav>
+    <script src="./data.js"></script>
+    <!-- fetch-data.html で作る、Open-Meteo から取得した気象データ -->
+    <script src="./weather-data.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

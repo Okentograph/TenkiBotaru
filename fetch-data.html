@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>天気螢 ― データ取得</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 28px 32px;
+        background: #04050a;
+        color: #c9ccd6;
+        font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      h1 {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0 0 4px;
+      }
+      p {
+        margin: 6px 0;
+        color: #8a8f9e;
+        max-width: 720px;
+      }
+      select,
+      button {
+        background: #141620;
+        color: #c9ccd6;
+        border: 1px solid #2c303c;
+        border-radius: 4px;
+        padding: 5px 12px;
+        font-size: 14px;
+        margin-right: 6px;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      #controls {
+        margin: 16px 0;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 10px 0 16px;
+      }
+      td {
+        padding: 3px 16px 3px 0;
+      }
+      .done {
+        color: #7fd18b;
+      }
+      #status {
+        color: #e6e8ee;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>天気螢 ― データ取得</h1>
+    <p>
+      Open-Meteo から各都市の2000〜2024年（25年分）の日ごとの気温・降水・日照を取得し、作品が読む
+      <b>weather-data.js</b> を作ります。無料の回数制限（1分600回・1時間5,000回・1日10,000回）を
+      超えないよう、5年分ずつ間をあけて取るので、全8都市で1時間半ほどかかります。このページを開いたままにしてください。
+      途中で閉じても、もう一度開いて「取得を始める」を押せば続きから取ります。
+    </p>
+    <div id="controls">
+      <button id="runBtn">取得を始める</button>
+      <button id="saveBtn">weather-data.js を保存</button>
+    </div>
+    <p id="status">待機中</p>
+    <table id="cityTable"></table>
+    <p>
+      保存した weather-data.js は、index.html と同じフォルダ（WeatherOrbit）に置いてください。
+      取得が終わっていない都市は、作品の都市一覧で選んでも描かれません。
+    </p>
+    <script src="./data.js"></script>
+    <script src="./fetch-data.js"></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+/* 天気螢 ― 画面全体を夜空にする */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #04050a;
+  color: #c9ccd6;
+  font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+/* キャンバスは画面いっぱい（実際の画素数は script.js で合わせる） */
+#sky {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  touch-action: none;
+}
+
+/* 軸の重ね板：マウスの操作は下の #sky に通す */
+#axes {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+/* 左上に小さく重ねる文字。作品の邪魔をしないよう薄くする */
+#overlay {
+  position: fixed;
+  top: 18px;
+  left: 22px;
+  opacity: 0.55;
+  transition: opacity 0.3s;
+  user-select: none;
+}
+
+#overlay:hover {
+  opacity: 1;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+h1 span {
+  font-size: 12px;
+  color: #8a8f9e;
+}
+
+#info {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: #8a8f9e;
+}
+
+/* 画面の上に並べる都市と、下に並べる年（選んだものだけ明るく） */
+.picker {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 4px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none; /* 長押しで出るメニューを止める */
+  touch-action: none; /* 指でなぞって複数を選べるように、画面のスクロールを止める */
+}
+
+#cities {
+  top: 18px;
+}
+
+#years {
+  bottom: 18px;
+}
+
+#cities span {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 3px 6px;
+  color: #5d6272;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#years span {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 3px 4px;
+  color: #5d6272;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#cities span:hover,
+#years span:hover {
+  color: #c9ccd6;
+}
+
+#years i {
+  font-style: normal;
+}
+
+#cities span.active,
+#years span.active {
+  color: #f2f3f7;
+  border-bottom: 1px solid #f2f3f7;
+}
+
+/* 画面の幅が狭いときは、都市の欄を題名の下に回して重ならないようにする */
+@media (max-width: 1100px) {
+  #cities {
+    top: 64px;
+  }
+}
+
+/* スマホなど狭い画面：文字を小さくまとめ、年は下2桁だけにして指で押しやすくする */
+@media (max-width: 600px) {
+  #overlay {
+    top: 12px;
+    left: 16px;
+    right: 16px;
+  }
+
+  h1 {
+    font-size: 13px;
+  }
+
+  h1 span {
+    display: none;
+  }
+
+  #cities {
+    top: 52px;
+  }
+
+  #cities span {
+    padding: 6px 5px;
+  }
+
+  #years {
+    bottom: max(12px, env(safe-area-inset-bottom));
+    gap: 0 2px;
+  }
+
+  #years i {
+    display: none;
+  }
+
+  #years span {
+    font-size: 13px;
+    padding: 8px 4px;
+  }
+}
